@@ -4,10 +4,11 @@ import com.project.rentacar.exception.BindingResultException;
 import com.project.rentacar.model.Car;
 import com.project.rentacar.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
-import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Set;
 
@@ -22,11 +23,11 @@ public class CarService {
         return carRepository.save(car);
     }
 
-    private List<Car> search(Set brand, Set carSegment, Long minPrice, Long maxPrice, Pageable pageable) {
+    public Page<Car> search(Set brand, Set carSegment, Long minPrice, Long maxPrice, Pageable pageable) {
         if(maxPrice == null) {
             maxPrice = Long.MAX_VALUE;
         }
-        return carRepository.findByBrandInAndPriceGreaterThanEqualAndPriceLessThanEqualAAndCarSegmentIn(brand, minPrice, maxPrice, carSegment);
+        return carRepository.findByBrandInAndPriceGreaterThanEqualAndPriceLessThanEqualAndCarSegmentIn(brand, minPrice, maxPrice, carSegment, pageable);
     }
 
     private void validateCar(BindingResult bindingResult) {
@@ -34,4 +35,6 @@ public class CarService {
             throw new BindingResultException(bindingResult);
         }
     }
+
+
 }

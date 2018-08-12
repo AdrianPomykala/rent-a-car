@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Brand brand;
@@ -32,16 +34,18 @@ public class Car {
     @Column(nullable = false)
     private String model;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
     private CarSegment carSegment;
 
-    @NotBlank
+    @NotNull
     @Min(1)
+    @Max(10000)
     @Column(nullable = false)
     private Long price;
 
-    @OneToMany
+    @OneToMany(mappedBy="car")
     private List<Rental> rentals = new ArrayList<>();
 
 }

@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
@@ -30,21 +31,25 @@ public class Rental {
     private String dropOffPoint;
 
     @FutureOrPresent
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private LocalDate startDate;
 
     @Future
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private LocalDate endDate;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private Integer length;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private Integer price;
+
+    @ManyToOne
+    @JoinColumn(name = "car_id")
+    private Car car;
 
 }
