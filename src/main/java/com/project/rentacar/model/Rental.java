@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
@@ -27,10 +29,12 @@ public class Rental {
     @Column(nullable = false)
     private String dropOffPoint;
 
+    @FutureOrPresent
     @NotBlank
     @Column(nullable = false)
     private LocalDate startDate;
 
+    @Future
     @NotBlank
     @Column(nullable = false)
     private LocalDate endDate;
