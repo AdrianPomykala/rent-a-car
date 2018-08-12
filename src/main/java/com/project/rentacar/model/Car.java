@@ -33,6 +33,10 @@ public class Car {
     private String model;
 
     @NotBlank
+    @Column(nullable = false)
+    private CarSegment carSegment;
+
+    @NotBlank
     @Min(1)
     @Column(nullable = false)
     private Long price;
