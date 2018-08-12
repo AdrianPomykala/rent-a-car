@@ -5,11 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -48,8 +46,17 @@ public class Rental {
     @Column(nullable = false)
     private Integer price;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "car_id")
     private Car car;
+
+//    @Size(min = 1)
+//    @ManyToMany
+//    @JoinTable(
+//            name = "rentals_cars",
+//            joinColumns = @JoinColumn(name = "rental_id", nullable = false),
+//            inverseJoinColumns = @JoinColumn(name = "car_id", nullable = false)
+//    )
+//    private List<Car> cars;
 
 }

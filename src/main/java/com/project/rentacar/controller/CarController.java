@@ -31,11 +31,11 @@ public class CarController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<Car> search(
-            @RequestParam(required = false) Set<Brand> brands,
-            @RequestParam(required = false) Set<CarSegment> carSegments,
+            @RequestParam(required = false) Set<Brand> brand,
+            @RequestParam(required = false) Set<CarSegment> carSegment,
             @RequestParam(defaultValue = "0") Long minPrice,
             @RequestParam(required = false) Long maxPrice,
             Pageable pageable) {
-        return carService.search(brands, carSegments, minPrice, maxPrice, pageable);
+        return carService.search(brand, carSegment, minPrice, maxPrice, pageable);
     }
 }

@@ -10,5 +10,5 @@ public enum CarSegment {
     F,
     J,
     M,
-    S,
+    S
 }

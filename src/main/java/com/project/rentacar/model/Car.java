@@ -44,8 +44,9 @@ public class Car {
     @Max(10000)
     @Column(nullable = false)
     private Long price;
-
-    @OneToMany(mappedBy="car")
-    private List<Rental> rentals = new ArrayList<>();
+//
+//    @OneToMany(mappedBy="car")
+//    @JoinColumn(name="RENTAL_ID")
+//    private List<Rental> rentals = new ArrayList<>();
 
 }

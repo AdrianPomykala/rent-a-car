@@ -1,4 +1,4 @@
-package com.project.rentacar.controller;
+package com.project.rentacar.exception;
 
 import com.project.rentacar.exception.BindingResultException;
 import org.springframework.http.HttpStatus;
