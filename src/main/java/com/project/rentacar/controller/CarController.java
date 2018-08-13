@@ -28,6 +28,12 @@ public class CarController {
         return carService.create(car, bindingResult);
     }
 
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Car getById(@PathVariable Long id) {
+        return carService.getById(id);
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<Car> search(
@@ -37,5 +43,19 @@ public class CarController {
             @RequestParam(required = false) Long maxPrice,
             Pageable pageable) {
         return carService.search(brand, carSegment, minPrice, maxPrice, pageable);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        carService.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Car update(
+            @PathVariable Long id,
+            @RequestBody @Valid Car rental, BindingResult bindingResult) {
+        return carService.update(id, rental, bindingResult);
     }
 }

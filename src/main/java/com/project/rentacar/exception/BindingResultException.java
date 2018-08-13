@@ -3,7 +3,7 @@ package com.project.rentacar.exception;
 import lombok.Getter;
 import org.springframework.validation.BindingResult;
 
-public class BindingResultException extends RuntimeException{
+public class BindingResultException extends RuntimeException {
 
     @Getter
     private BindingResult bindingResult;

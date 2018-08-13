@@ -1,6 +1,8 @@
-package com.project.rentacar.exception;
+package com.project.rentacar.controller;
 
 import com.project.rentacar.exception.BindingResultException;
+import com.project.rentacar.exception.NotFoundException;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -15,6 +17,13 @@ import java.util.Map;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public ExceptionMessage handleNotFoundException(NotFoundException e) {
+        return new ExceptionMessage(e.getMessage());
+    }
+
     @ExceptionHandler(BindingResultException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
@@ -24,9 +33,19 @@ public class ControllerExceptionHandler {
 
     private Map<String, String> getErrors(BindingResult bindingResult) {
         Map<String, String> errors = new HashMap<>();
-        for (FieldError error: bindingResult.getFieldErrors()) {
+        for (FieldError error : bindingResult.getFieldErrors()) {
             errors.put(error.getField(), error.getDefaultMessage());
         }
         return errors;
+    }
+
+    class ExceptionMessage {
+
+        @Getter
+        private String message;
+
+        ExceptionMessage(String message) {
+            this.message = message;
+        }
     }
 }
